@@ -106,7 +106,7 @@ const AuthContainer: React.FC<Props> = ({
               name="Email"
               value={email}
               onChange={(e) => handle(e, { func: setEmail, name: "email" })}
-              placeholder="s.manev@eurovis.bg"
+              placeholder="placeholder@email.com"
             />
           </InputGroup>
 
