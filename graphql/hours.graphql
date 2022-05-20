@@ -1,0 +1,44 @@
+query Hours{
+  hours{
+    _id,
+    date,
+    value,
+    createdBy
+  }
+}
+
+query Hour($id: String!){
+  hour(_id: $id){
+    _id,
+    date,
+    value,
+    createdBy
+  }
+}
+
+mutation CreateHour($data: EditHourInput!){
+  createHour(data: $data) {
+    _id,
+    date,
+    value,
+    createdBy,
+  }
+}
+
+mutation DeleteHour($id: String!){
+  deleteHour(_id: $id) {
+    _id,
+    date,
+    value,
+    createdBy,
+  }
+}
+
+mutation EditHour($id: String!, $data: EditHourInput!){
+  editHour(_id: $id, data: $data) {
+    _id,
+    date,
+    value,
+    createdBy,
+  }
+}
