@@ -2,7 +2,10 @@ import React from "react";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { Container } from "react-bootstrap";
-import { useDeleteHourMutation, useHoursQuery } from "../../generated/graphql";
+import {
+  useEditHourMutation,
+  useHoursQuery,
+} from "../../generated/graphql";
 import HourList from "./HourList";
 
 interface Props {
@@ -12,19 +15,26 @@ interface Props {
 const HourContainer: React.FC<Props> = ({ user }) => {
   const { isLoading, isError, data, error, refetch } = useHoursQuery({});
 
-  const { mutate } = useDeleteHourMutation({
+  const { mutate } = useEditHourMutation({
     onSuccess: (res) => {
       refetch();
-      toast.success(`Successfully deleted record! Date: ${res?.deleteHour.date}`)
+      toast.success(
+        `Successfully deleted record! Date: ${res?.editHour.date}`
+      );
     },
     onError: (err: any) => {
-        const errorMsg = String(err).split(":")[1];
-        toast.error(`${errorMsg}`)
-    }
+      const errorMsg = String(err).split(":")[1];
+      toast.error(`${errorMsg}`);
+    },
   });
 
   function onDelete(_id: string) {
-    mutate({ id: _id });
+    mutate({
+      id: _id,
+      data: {
+        flag: true,
+      },
+    });
   }
 
   if (isLoading) {
@@ -41,9 +51,10 @@ const HourContainer: React.FC<Props> = ({ user }) => {
   if (isError) {
     return <span>Error: Hours</span>;
   }
+
   return (
     <Container className="list-conatiner">
-      {data && <HourList hours={data.hours} user={user} onDelete={onDelete}/>}
+      {data && <HourList hours={data.hours} user={user} onDelete={onDelete} />}
     </Container>
   );
 };

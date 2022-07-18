@@ -11,7 +11,11 @@ interface Props {
 }
 
 const HourList: React.FC<Props> = ({ hours, user, onDelete }) => {
-  const userHours = hours.filter((hour) => hour.createdBy === user._id);
+  console.log(hours.filter((hour) => hour.flag === true))
+  const flagHours = hours.filter((hour) => hour.flag !== true);
+  const userHours = flagHours.filter((hour) => hour.createdBy === user._id).reverse();
+
+  console.log(userHours)
 
   if (userHours.length === 0) {
     return (

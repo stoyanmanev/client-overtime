@@ -27,7 +27,8 @@ const HoutStatisticContainer: React.FC<Props> = ({ user }) => {
     return <span>Monthly statistics</span>;
   }
 
-  const userHoursList = data?.hours.filter(
+  const flagHoursList = data?.hours.filter((hour) => hour.flag !== true);
+  const userHoursList = flagHoursList?.filter(
     (hour) => hour.createdBy === user._id
   );
 

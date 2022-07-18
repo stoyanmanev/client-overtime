@@ -3,6 +3,7 @@ query Hours{
     _id,
     date,
     value,
+    flag,
     createdBy
   }
 }
@@ -12,6 +13,7 @@ query Hour($id: String!){
     _id,
     date,
     value,
+    flag,
     createdBy
   }
 }
@@ -39,6 +41,7 @@ mutation EditHour($id: String!, $data: EditHourInput!){
     _id,
     date,
     value,
+    flag,
     createdBy,
   }
 }

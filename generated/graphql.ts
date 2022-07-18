@@ -32,6 +32,7 @@ export type CreateUserInput = {
 export type EditHourInput = {
   date?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
+  flag?: InputMaybe<Scalars['Boolean']>;
   value?: InputMaybe<Scalars['Float']>;
 };
 
@@ -49,6 +50,7 @@ export type Hour = {
   createdBy: Scalars['String'];
   date: Scalars['String'];
   description?: Maybe<Scalars['String']>;
+  flag?: Maybe<Scalars['Boolean']>;
   value: Scalars['Float'];
 };
 
@@ -57,6 +59,7 @@ export type HourInput = {
   createdBy: Scalars['String'];
   date: Scalars['String'];
   description?: InputMaybe<Scalars['String']>;
+  flag?: InputMaybe<Scalars['Boolean']>;
   value: Scalars['Float'];
 };
 
@@ -144,14 +147,14 @@ export type User = {
 export type HoursQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HoursQuery = { __typename?: 'Query', hours: Array<{ __typename?: 'Hour', _id: any, date: string, value: number, createdBy: string }> };
+export type HoursQuery = { __typename?: 'Query', hours: Array<{ __typename?: 'Hour', _id: any, date: string, value: number, flag?: boolean | null, createdBy: string }> };
 
 export type HourQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type HourQuery = { __typename?: 'Query', hour: { __typename?: 'Hour', _id: any, date: string, value: number, createdBy: string } };
+export type HourQuery = { __typename?: 'Query', hour: { __typename?: 'Hour', _id: any, date: string, value: number, flag?: boolean | null, createdBy: string } };
 
 export type CreateHourMutationVariables = Exact<{
   data: EditHourInput;
@@ -173,7 +176,7 @@ export type EditHourMutationVariables = Exact<{
 }>;
 
 
-export type EditHourMutation = { __typename?: 'Mutation', editHour: { __typename?: 'Hour', _id: any, date: string, value: number, createdBy: string } };
+export type EditHourMutation = { __typename?: 'Mutation', editHour: { __typename?: 'Hour', _id: any, date: string, value: number, flag?: boolean | null, createdBy: string } };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -234,6 +237,7 @@ export const HoursDocument = `
     _id
     date
     value
+    flag
     createdBy
   }
 }
@@ -256,6 +260,7 @@ export const HourDocument = `
     _id
     date
     value
+    flag
     createdBy
   }
 }
@@ -316,6 +321,7 @@ export const EditHourDocument = `
     _id
     date
     value
+    flag
     createdBy
   }
 }
